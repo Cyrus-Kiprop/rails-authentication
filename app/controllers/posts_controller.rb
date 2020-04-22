@@ -76,5 +76,5 @@ class PostsController < ApplicationController
 
   def authenticate_user!
     redirect_to new_user_session_path, alert: 'You must be logged in to access this page.' if helpers.current_user.nil?
-end
+  end
 end
