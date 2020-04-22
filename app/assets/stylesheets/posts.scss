@@ -1,3 +1,84 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+header {
+  background-color:#6515DD;
+  height: 48px;
+  nav {
+    // background-color:#6515DD;
+    height:100%;
+    .svg-logo {
+      height: 100%;
+      fill: white;
+      // border: 1px solid red;
+      width: 170px;
+    }
+
+    .right-links{
+      display: flex;
+      height: 100%;
+      align-items: center;
+
+      .post-btn{
+        color:#6515DD;
+        font-weight: 500;
+      }
+    }
+  }
+}
+.container {
+  .latest-posts{
+    font-weight:700;
+    font-size: 14px;
+    color: #6515DD;
+    text-transform: uppercase;
+  }
+}
+
+
+.posts-icons{
+  .card-link{
+    color: #6515DD;
+    i {
+      color: #6515DD;
+    }
+  }
+}
+
+.new-post-feed{
+
+
+  width:100%;
+
+
+  .new-post-feed {
+    .purple-border{
+      textarea {
+        border: 1px solid #ba68c8;
+      }
+      .form-control {
+        width: 100%;
+        height: 160px;
+        &:focus{
+          border: 1px solid #ba68c8;
+          box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+        }
+
+      }
+    }
+  }
+
+
+}
+.post-feed-list{
+
+  .feed-user-info{
+    margin: 0	;
+    padding: 0;
+    li{
+      list-style-type: none;
+      font-size: 14px	;
+    }
+  }
+
+}

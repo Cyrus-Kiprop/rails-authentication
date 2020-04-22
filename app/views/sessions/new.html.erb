@@ -1,0 +1,30 @@
+<h1>Sessions#new</h1>
+<p>Find me in app/views/sessions/new.html.erb</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-xl-5 col-md-7 col-sm-9 col-12 shadow border-rounded pt-3 mx-auto ">
+<h2>Log in</h2>
+
+<%= simple_form_for(LoginDetails.new, as: 'user', url: sessions_path) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" } %>
+    <%= f.input :password,
+                required: true,
+                input_html: { autocomplete: "current-password" } %>
+    <%# <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  </div>
+
+  <div class="form-actions d-inline-block">
+    <%= f.button :submit, "Log in", class:"btn btn-info" %>
+  </div>
+<% end %>
+
+
+
+</div>
+</div>
+</div>

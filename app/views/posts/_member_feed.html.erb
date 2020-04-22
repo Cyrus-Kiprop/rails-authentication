@@ -1,0 +1,59 @@
+<% if user_signed_in?%>
+  <div class="card flex-row pt-3 border-0 mb-3 shadow">
+    <div class="gravatar px-3 ">
+      <%= gravatar_image_tag(current_user.email, size: 44, alt: "#{current_user.fname} #{current_user.lname}", class: 'rounded-circle',:gravatar => { :size => 35 }) %>
+    </div>
+
+    <div class="new-post-feed pr-3">
+      <%= render 'posts/form' %>
+    </div>
+
+  </div>
+
+<% end %>
+
+
+<% Post.all.each do |post|%>
+  <div class="post-feed-list card flex-row  mb-2 py-2 border-0 shadow">
+    <% if user_signed_in?  %>
+      <div class="gravatar px-3 ">
+        <%= gravatar_image_tag(current_user.email, size: 44, alt: "#{current_user.fname} #{current_user.lname}", class: 'rounded-circle',:gravatar => { :size => 45 }) %>
+      </div>
+    <% end %>
+    <div class="card border-0" >
+      <ul class="d-flex feed-user-info flex-column">
+        <% if user_signed_in? %>
+        <li class="font-weight-bolder">
+          <%= current_user.fname + ' ' + current_user.lname %>
+        </li>
+        <li class="">
+          <%= current_user.username %>
+        </li>
+      <% end %>
+      <li class="">
+        <%= post.body %>
+      </li>
+      </ul>
+
+      <div class="posts-icons d-flex">
+        <% if user_signed_in? && current_user.id == post.user_id %>
+          <%= link_to 	edit_post_path(post), class: 'card-link' do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
+
+          <%= link_to post, method: :delete, data: { confirm: "Are you sure you want to delete this post?"}, class: 'card-link' do %>
+            <i class="far fa-trash-alt"></i>
+          <% end %>
+
+          <%= link_to '#', class: 'card-link' do %>
+            <i class="fas fa-share-alt-square"></i>
+          <% end %>
+        <% end %>
+        <%= link_to '#', class: 'card-link' do %>
+          456
+          <i class="far fa-eye"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

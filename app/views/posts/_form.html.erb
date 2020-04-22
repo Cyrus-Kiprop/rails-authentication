@@ -1,22 +1,18 @@
-<%= form_with(model: post, local: true) do |form| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= simple_form_for(Post.new, as: :post, method: :post, url: posts_path) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <div class="form-group purple-border">
+      <label for="exampleFormControlTextarea4" class="font-weight-bolder">Post something nasty.
+      </label>
+      <%= f.input :body, label: false, :as => :text, :input_html => { :rows => 5 , :style => 'width: 100%'} , placeholder: "Compose a post ..." %>
     </div>
-  <% end %>
+    <!-- <div class="form-actions"> -->
+    <%= f.button :submit , method: :post, class: 'btn btn-info btn-sm mb-3'%>
+    <!-- </div> -->
 
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

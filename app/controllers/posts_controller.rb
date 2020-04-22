@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
 
   # GET /posts
   # GET /posts.json
@@ -13,23 +14,25 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = helpers.current_user.posts.build
   end
 
   # GET /posts/1/edit
-  def edit; end
+  def edit
+    @post = helpers.current_user.posts.find(params[:id])
+  end
 
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = helpers.current_user.posts.build(post_params)
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new }
+        format.html { render :index }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -40,7 +43,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -70,4 +73,8 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:body)
   end
+
+  def authenticate_user!
+    redirect_to new_user_session_path, alert: 'You must be logged in to access this page.' if helpers.current_user.nil?
+end
 end

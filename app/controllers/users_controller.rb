@@ -17,7 +17,10 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1/edit
-  def edit; end
+  def edit
+     @user = current_user
+    @task = User.find(params[:id])
+  end
 
   # POST /users
   # POST /users.json
@@ -68,6 +71,6 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:fname, :lname, :username, :email, :password, :password_confirmation)
   end
 end
