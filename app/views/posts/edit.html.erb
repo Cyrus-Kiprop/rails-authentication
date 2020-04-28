@@ -1,0 +1,41 @@
+
+<div class="container">
+  <h2 class="text-center">Edit Post</h2>
+  <div class="row">
+    <div class="col-6 p-0 mx-auto">
+
+      <div class="card flex-row  pt-3 border-0 mb-3 shadow">
+        <div class="gravatar px-3 ">
+          <%= gravatar_image_tag(current_user.email, size: 44, alt: "#{current_user.fname} #{current_user.lname}", class: 'rounded-circle',:gravatar => { :size => 35 }) %>
+        </div>
+
+        <div class="new-post-feed pr-3">
+
+          <%= simple_form_for(@post, as: :post ) do |f| %>
+            <%= f.error_notification %>
+            <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+            <div class="form-inputs">
+              <div class="form-group purple-border">
+                <label for="exampleFormControlTextarea4" class="font-weight-bolder">Post something nasty.
+                </label>
+                <%= f.input :body, label: false, :as => :text, :input_html => { :rows => 5 , :style => 'width: 100%'} , placeholder: "Compose a post ..." %>
+              </div>
+              <!-- <div class="form-actions"> -->
+              <%= f.button :submit, class: 'btn btn-info btn-sm mb-3'%>
+              <!-- </div> -->
+
+            </div>
+
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<%= link_to 'Show', @post %> |
+<%= link_to 'Back', posts_path %>

@@ -1,0 +1,18 @@
+
+<%= simple_form_for(Post.new, as: :post, method: :post, url: posts_path) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <div class="form-group purple-border">
+      <label for="exampleFormControlTextarea4" class="font-weight-bolder">Post something nasty.
+      </label>
+      <%= f.input :body, label: false, :as => :text, :input_html => { :rows => 5 , :style => 'width: 100%'} , placeholder: "Compose a post ..." %>
+    </div>
+    <!-- <div class="form-actions"> -->
+    <%= f.button :submit , method: :post, class: 'btn btn-info btn-sm mb-3'%>
+    <!-- </div> -->
+
+  </div>
+
+<% end %>
